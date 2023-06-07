@@ -12,29 +12,31 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
-import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 
-public class Browser {
+public class DeleteAccount {
 	/**
-	 * Open a browser instance with extensions
-	 * @param extensions
+	 * Deleting account
+	 * @return DeleteAccount
 	 */
-	def openBrowserWithExtensions(List<String> extensions) {
-		ChromeOptions options = new ChromeOptions()
-		for(String extension in extensions) {
-			options.addExtensions(new File(extension))
-		}
-
-		System.setProperty("webdriver.chrome.driver", DriverFactory.getChromeDriverPath())
-		ChromeDriver driver = new ChromeDriver(options)
-
-		DriverFactory.changeWebDriver(driver)
+	public DeleteAccount deleteAccount() {
+		KeywordUtil.logInfo("Deleting account")
+		
+		WebUI.click(findTestObject('Object Repository/Web/Home/btn_deleteAccount'))
+		
+		TestObject testObject = findTestObject('Object Repository/Web/Delete Account/txt_deleteAccountConfirmationTitle')
+		
+		WebUI.waitForElementVisible(testObject, 10)
+		
+		WebUI.verifyElementText(testObject, 'ACCOUNT DELETED!')
+	
+		WebUI.click(findTestObject('Object Repository/Web/Delete Account/btn_continueDeletingAccount'))
+		
+		return this;
 	}
 }

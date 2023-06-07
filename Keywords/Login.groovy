@@ -12,29 +12,32 @@ import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testcase.TestCase
 import com.kms.katalon.core.testdata.TestData
 import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
-import com.kms.katalon.core.webui.driver.DriverFactory
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 
 import internal.GlobalVariable
 
-public class Browser {
-	/**
-	 * Open a browser instance with extensions
-	 * @param extensions
-	 */
-	def openBrowserWithExtensions(List<String> extensions) {
-		ChromeOptions options = new ChromeOptions()
-		for(String extension in extensions) {
-			options.addExtensions(new File(extension))
-		}
-
-		System.setProperty("webdriver.chrome.driver", DriverFactory.getChromeDriverPath())
-		ChromeDriver driver = new ChromeDriver(options)
-
-		DriverFactory.changeWebDriver(driver)
+public class Login {
+	public Login login(String email, String password) {
+		KeywordUtil.logInfo("Loggin in using email ${email}")
+		
+		TestObject testObject = findTestObject('Object Repository/Web/Login/txt_loginTitle')
+		
+		WebUI.waitForElementVisible(testObject, 10)
+		
+		WebUI.verifyElementVisible(testObject)
+		
+		WebUI.verifyElementText(testObject, 'Login to your account')
+		
+		WebUI.setText(findTestObject('Object Repository/Web/Login/input_userLoginEmail'), email)
+		
+		WebUI.setEncryptedText(findTestObject('Object Repository/Web/Login/input_userLoginPassword'), password)
+		
+		WebUI.click(findTestObject('Object Repository/Web/Login/btn_login'))
+		
+		KeywordUtil.markPassed("Logged in successfully")
+		return this;
 	}
 }

@@ -1,24 +1,13 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
 import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+
+import static org.junit.Assert.assertTrue
 
 import org.junit.Assert
 import org.openqa.selenium.Keys
-import org.testng.Assert as Keys
 
 RandomStrings randomStringsInstance = new RandomStrings();
 
@@ -37,18 +26,31 @@ Map<String, Object> userData=[
 	'mobileNumber':'+15055555050'
 	];
 
+	
+Map<String, String> cardInformation = [
+	'nameOnCard':'SveWVNiStgXzx3+SHZwihsToH2FK9S4i',
+	'cardNumber':'gECNrpRrZE8c58gpTl5H5m8EM7csNIO/',
+	'cardCVC':'f4JIPmZZZgQ=',
+	'cardEpirationMonth':'IdwLPcOKu+o=',
+	'cardExpirationYear':'Rseqxu0Qrtc='
+	]
+	
 List<String> extensions = [GlobalVariable.ublockOriginPath]
+
+List<String> products = ['Sleeveless Dress','Men Tshirt']
 	
 TestObject testObject;
 
 //Setup test
-new Browser().openBrowserWithExtensions(extensions)
+new Browser()
+	.openBrowserWithExtensions(extensions)
 
 WebUI.navigateToUrl(GlobalVariable.signUpPage);
 
 WebUI.maximizeWindow();
 
-new SignUP().createNewAccount(userData)
+new SignUP()
+	.createNewAccount(userData)
 
 testObject=findTestObject('Object Repository/Web/Home/btn_logout')
 
@@ -68,7 +70,8 @@ Assert.assertTrue(elementAttribute.contains('color: orange;'));
 
 WebUI.click(findTestObject('Object Repository/Web/Home/btn_login_SignUp'));
 
-new Login().login(GlobalVariable.UserEmail, GlobalVariable.UserEncryptedPassword)
+new Login()
+	.login(GlobalVariable.UserEmail, GlobalVariable.UserEncryptedPassword)
 
 testObject = findTestObject('Object Repository/Web/Home/txt_loggedInUser')
 
@@ -76,7 +79,39 @@ WebUI.waitForElementVisible(testObject, 10)
 
 WebUI.verifyElementText(testObject, userData.get('name'))
 
-new DeleteAccount().deleteAccount()
+
+for(String product in products) {
+	new Products()
+		.addProduct(product)	
+}
+
+WebUI.click(findTestObject('Object Repository/Web/Home/btn_cart'))
+
+WebUI.waitForPageLoad(60)
+
+String pageURL = WebUI.getUrl()
+
+assertTrue(pageURL.contains('view_cart'))
+
+WebUI.click(findTestObject('Object Repository/Web/Cart/btn_proceedToCheckout'))
+
+new Cart()
+	.checkDeliveryAddress(userData)
+	.checkBillingAddress(userData)
+	.checkProductsInCart(products)
+	.addDescription()
+	.placeOrder()
+
+new Payment()
+	.setPaymentInformation(cardInformation)
+	.payAndConfirmOrder() 
+
+testObject = findTestObject('Object Repository/Web/Payment/txt_orderPlacedTitle')
+WebUI.waitForElementVisible(testObject, 10)
+WebUI.verifyElementText(testObject, 'ORDER PLACED!')
+	
+new DeleteAccount()
+	.deleteAccount()
 
 //Tear down
 WebUI.closeBrowser()
