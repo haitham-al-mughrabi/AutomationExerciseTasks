@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalVariableEntities>
+   <description></description>
+   <name>default</name>
+   <tag></tag>
+   <defaultProfile>true</defaultProfile>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'https://automationexercise.com/'</initValue>
+      <name>homePageURL</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>UserEmail</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'V35d/XPbheCw/H9OkAB1z/fwwQF1E82sJnzdASfmGFk='</initValue>
+      <name>UserEncryptedPassword</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'https://automationexercise.com/signup'</initValue>
+      <name>signUpPage</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'Extenstions/ublockOrigin.crx'</initValue>
+      <name>ublockOriginPath</name>
+   </GlobalVariableEntity>
+</GlobalVariableEntities>
