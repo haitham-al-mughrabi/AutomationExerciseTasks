@@ -54,7 +54,7 @@ public class Booking {
 			]
 		return this;
 	}
-	
+		
 	/**
 	 * Initializing Booking information using real data
 	 * @param realData
@@ -137,7 +137,7 @@ public class Booking {
 	public Booking createBooking(def bookInformationAsJson) {
 		KeywordUtil.logInfo("Creating Booking using pre-initialized book information json object");
 		
-		requestObject = findTestObject('Object Repository/API/Create Booking',['bookInformation':bookInformationAsJson]);
+		requestObject = findTestObject('Object Repository/API/Create Booking',['bookInformation':bookInformationAsJson, 'cookies':"token=${GlobalVariable.userToken}"]);
 		
 		response = WS.sendRequest(requestObject);
 		
@@ -191,8 +191,13 @@ public class Booking {
 		return this;
 	}
 	
+	/**
+	 * Get booking based on given booking id
+	 * @param bookingID
+	 * @return Booking
+	 */
 	public Booking getBooking(int bookingID) {
-		KeywordUtil.logInfo("Deleting booking based on given Booking ID. Given Booking ID: ${bookingID}");
+		KeywordUtil.logInfo("Get booking based on given Booking ID. Given Booking ID: ${bookingID}");
 		
 		requestObject = findTestObject('Object Repository/API/Get Booking',['bookingID':bookingID, 'cookies':"token=${GlobalVariable.userToken}"]);
 		
@@ -200,4 +205,20 @@ public class Booking {
 		
 		return this;
 	}
+	
+	/**
+	 * Update booking based on given booking id
+	 * @param bookingID
+	 * @return Booking
+	 */
+	public Booking updateBooking(int bookingID, def bookInformationAsJson) {
+		KeywordUtil.logInfo("Update booking based on given Booking ID. Given Booking ID: ${bookingID}");
+		
+		requestObject = findTestObject('Object Repository/API/Update Booking',['bookingID':bookingID, 'cookies':"token=${GlobalVariable.userToken}", 'updatedBody':bookInformationAsJson]);
+		
+		response = WS.sendRequest(requestObject);
+		
+		return this;
+	}
+	
 }

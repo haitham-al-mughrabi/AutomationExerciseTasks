@@ -44,9 +44,9 @@
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>Authorization</name>
+      <name>Cookie</name>
       <type>Main</type>
-      <value>Basic ${userToken}</value>
+      <value>${cookies}</value>
       <webElementGuid>dfee3dab-0eee-4c48-a3eb-7c53a9aabb15</webElementGuid>
    </httpHeaderProperties>
    <katalonVersion>8.6.5</katalonVersion>
@@ -63,11 +63,11 @@
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
    <variables>
-      <defaultValue>GlobalVariable.userToken</defaultValue>
+      <defaultValue>null</defaultValue>
       <description></description>
       <id>0ccd1b78-80a2-415b-a025-4eae354bbe61</id>
       <masked>false</masked>
-      <name>userToken</name>
+      <name>cookies</name>
    </variables>
    <variables>
       <defaultValue>null</defaultValue>

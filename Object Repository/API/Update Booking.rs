@@ -20,7 +20,7 @@
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n    \&quot;firstname\&quot; : \&quot;James\&quot;,\n    \&quot;lastname\&quot; : \&quot;Brown\&quot;,\n    \&quot;totalprice\&quot; : 111,\n    \&quot;depositpaid\&quot; : true,\n    \&quot;bookingdates\&quot; : {\n        \&quot;checkin\&quot; : \&quot;2018-01-01\&quot;,\n        \&quot;checkout\&quot; : \&quot;2019-01-01\&quot;\n    },\n    \&quot;additionalneeds\&quot; : \&quot;Breakfast\&quot;\n}&quot;,
+  &quot;text&quot;: &quot;${updatedBody}&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -36,9 +36,9 @@
    <httpHeaderProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>Authorization</name>
+      <name>Cookie</name>
       <type>Main</type>
-      <value>Bearer ${userToken}</value>
+      <value>${cookies}</value>
       <webElementGuid>cd8c6bc6-eb97-4bf0-a9f2-3278100e68e9</webElementGuid>
    </httpHeaderProperties>
    <httpHeaderProperties>
@@ -70,11 +70,18 @@
       <name>bookingID</name>
    </variables>
    <variables>
-      <defaultValue>GlobalVariable.userToken</defaultValue>
+      <defaultValue>null</defaultValue>
       <description></description>
       <id>30d3063f-209a-47d0-96ff-5dbf66ef2b6b</id>
       <masked>false</masked>
-      <name>userToken</name>
+      <name>cookies</name>
+   </variables>
+   <variables>
+      <defaultValue>null</defaultValue>
+      <description></description>
+      <id>9e910c16-a615-4b3f-83e8-a5c76e624b41</id>
+      <masked>false</masked>
+      <name>updatedBody</name>
    </variables>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
