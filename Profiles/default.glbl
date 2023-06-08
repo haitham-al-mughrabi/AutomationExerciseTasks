@@ -29,4 +29,14 @@
       <initValue>'Extenstions/ublockOrigin.crx'</initValue>
       <name>ublockOriginPath</name>
    </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>userToken</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>bookInformationAsJson</name>
+   </GlobalVariableEntity>
 </GlobalVariableEntities>

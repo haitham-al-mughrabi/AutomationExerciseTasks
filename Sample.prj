@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>Sample</name>
+   <name>Automation Exercises Tasks</name>
    <tag></tag>
    <UUID>68583c3a-a718-4aea-ae28-7f0a2d5f08aa</UUID>
    <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
+   <projectFileLocation>/Users/haithamal/Katalon Studio/Sample/Sample.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
