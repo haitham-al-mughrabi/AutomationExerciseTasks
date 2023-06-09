@@ -1,10 +1,10 @@
 {
-  "keywordFileContentHash": "502BB8E32D2995A0970A308840FF9381",
+  "keywordFileContentHash": "313EE1BC472333FAECEFAF69B05E2A35",
   "keywordClasses": [
     {
       "name": "RandomStrings",
       "keywordMethods": []
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

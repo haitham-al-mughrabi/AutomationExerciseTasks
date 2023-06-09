@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>New requirment:
+-Create and validate by get bopking in one scenario</description>
+   <name>TC5 - Create and validate booking</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>7247c6cb-134e-4c1f-952e-bc737456353e</testCaseGuid>
+</TestCaseEntity>

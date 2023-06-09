@@ -221,4 +221,21 @@ public class Booking {
 		return this;
 	}
 	
+	public Booking partiallyUpdateBooking(int bookingID, def changedBookingInformation) {
+		KeywordUtil.logInfo("Partially Updating booking based on given Booking ID. Given Booking ID: ${bookingID}");
+		
+		requestObject = findTestObject('Object Repository/API/Partial Update Booking',['bookingID':bookingID, 'cookies':"token=${GlobalVariable.userToken}", 'updatedBody':changedBookingInformation]);
+		
+		response = WS.sendRequest(requestObject);
+		
+		return this;
+	}
+	/**
+	 * Parse and Get Response Body as Map
+	 * @return parsedResponseBody
+	 */
+	public Map<String, Object> parseAndGetResponseBodyAsMap() {
+		parseResponseBodyAsMap()
+		return getResponseBodyAsMap()
+	}
 }

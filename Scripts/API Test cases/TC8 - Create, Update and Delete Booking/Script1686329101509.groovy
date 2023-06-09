@@ -31,11 +31,31 @@ Map<String, Object> responseBody = bookingInstance.parseAndGetResponseBodyAsMap(
 int bookingID = responseBody.get('bookingid')
 
 responseStatusCode = bookingInstance
-    .deleteBooking(bookingID)
+	.setupRandomTestData()
+	.convertBookInformationToJson()
+    .updateBooking(bookingID, GlobalVariable.bookInformationAsJson)
     .checkResponseStatus()
 
-if(responseStatusCode != 201) {
+if(responseStatusCode != 200) {
     errorHandlingInstance.handleFailure(responseStatusCode)
+}
+
+responseBody = bookingInstance.parseAndGetResponseBodyAsMap()
+
+Map<String, Object> bookingInformation = bookingInstance.getBookingInformationAsMap()
+
+boolean checker = new Maps().compareMaps(bookingInformation, responseBody)
+
+if(checker) {
+    KeywordUtil.logInfo("Booking has been updated")
+}
+
+responseStatusCode = bookingInstance
+	.deleteBooking(bookingID)
+	.checkResponseStatus()
+
+if(responseStatusCode != 201) {
+	errorHandlingInstance.handleFailure(responseStatusCode)
 }
 
 KeywordUtil.markPassed("Booking has been deleted")

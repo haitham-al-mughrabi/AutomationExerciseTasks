@@ -5,63 +5,48 @@ import internal.GlobalVariable
 
 Booking bookingInstance = new Booking()
 
-try {
-    int responseStatusCode = bookingInstance
-        .setupRandomTestData()
-        .convertBookInformationToJson()
-        .authenticateRequest('admin', 'password123')
-        .checkResponseStatus()
+ErrorHandling errorHandlingInstance = new ErrorHandling()
 
-    if(responseStatusCode != 200) {
-        handleFailure(responseStatusCode)
-        return
-    }
+int responseStatusCode = bookingInstance
+    .setupRandomTestData()
+    .convertBookInformationToJson()
+    .authenticateRequest('admin', 'password123')
+    .checkResponseStatus()
 
-    responseStatusCode = bookingInstance
-        .storeUserToken()
-        .createBooking(GlobalVariable.bookInformationAsJson)
-        .checkResponseStatus()
-
-    if(responseStatusCode != 200) {
-        handleFailure(responseStatusCode)
-        return
-    }
-
-    Map<String, Object> responseBody = getResponseBodyAsMap(bookingInstance)
-
-    int bookingID = responseBody.get('bookingid')
-
-    responseStatusCode = bookingInstance
-		.setupRandomTestData()
-		.convertBookInformationToJson()
-        .updateBooking(bookingID, GlobalVariable.bookInformationAsJson)
-        .checkResponseStatus()
-
-    if(responseStatusCode != 200) {
-        handleFailure(responseStatusCode)
-        return
-    }
-
-    responseBody = getResponseBodyAsMap(bookingInstance)
-
-    Map<String, Object> bookingInformation = bookingInstance.getBookingInformationAsMap()
-
-	
-    boolean checker = new Maps().compareMaps(bookingInformation, responseBody)
-
-    if(checker) {
-        KeywordUtil.markPassed("Booking has been deleted")
-    }
-} catch (Exception e) {
-    KeywordUtil.markFailedAndStop("Exception occurred: ${e.getMessage()}")
+if(responseStatusCode != 200) {
+    errorHandlingInstance.handleFailure(responseStatusCode)
 }
 
-void handleFailure(int responseStatusCode) {
-    KeywordUtil.markFailedAndStop("Something went wrong. Status code: ${responseStatusCode}")
+responseStatusCode = bookingInstance
+    .storeUserToken()
+    .createBooking(GlobalVariable.bookInformationAsJson)
+    .checkResponseStatus()
+
+if(responseStatusCode != 200) {
+    errorHandlingInstance.handleFailure(responseStatusCode)
 }
 
-Map<String, Object> getResponseBodyAsMap(Booking bookingInstance) {
-    return bookingInstance
-        .parseResponseBodyAsMap()
-        .getResponseBodyAsMap()
+Map<String, Object> responseBody = bookingInstance.parseAndGetResponseBodyAsMap()
+
+int bookingID = responseBody.get('bookingid')
+
+responseStatusCode = bookingInstance
+	.setupRandomTestData()
+	.convertBookInformationToJson()
+    .updateBooking(bookingID, GlobalVariable.bookInformationAsJson)
+    .checkResponseStatus()
+
+if(responseStatusCode != 200) {
+    errorHandlingInstance.handleFailure(responseStatusCode)
+}
+
+responseBody = bookingInstance.parseAndGetResponseBodyAsMap()
+
+Map<String, Object> bookingInformation = bookingInstance.getBookingInformationAsMap()
+
+
+boolean checker = new Maps().compareMaps(bookingInformation, responseBody)
+
+if(checker) {
+    KeywordUtil.markPassed("Booking has been updated")
 }

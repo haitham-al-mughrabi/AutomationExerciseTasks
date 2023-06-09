@@ -1,10 +1,10 @@
 {
-  "keywordFileContentHash": "ABC21EDD1A268682FAC53F6D339948FE",
+  "keywordFileContentHash": "5FB3FF4D778810355BEB0F38110F77D9",
   "keywordClasses": [
     {
       "name": "Booking",
       "keywordMethods": []
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }

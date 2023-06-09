@@ -5,33 +5,26 @@ import internal.GlobalVariable
 
 Booking bookingInstance = new Booking()
 
-try {
-    int responseStatusCode = bookingInstance
-        .setupRandomTestData()
-        .convertBookInformationToJson()
-        .authenticateRequest('admin', 'password123')
-        .checkResponseStatus()
+ErrorHandling errorHandlingInstance = new ErrorHandling()
 
-    if(responseStatusCode != 200) {
-        handleFailure(responseStatusCode)
-        return
-    }
+int responseStatusCode = bookingInstance
+    .setupRandomTestData()
+    .convertBookInformationToJson()
+    .authenticateRequest('admin', 'password123')
+    .checkResponseStatus()
 
-    responseStatusCode = bookingInstance
-        .storeUserToken()
-        .createBooking(GlobalVariable.bookInformationAsJson)
-        .checkResponseStatus()
-
-    if(responseStatusCode != 200) {
-        handleFailure(responseStatusCode)
-        return
-    }
-
-    KeywordUtil.markPassed("Booking has been created")
-} catch (Exception e) {
-    KeywordUtil.markFailedAndStop("Exception occurred: ${e.getMessage()}")
+if(responseStatusCode != 200) {
+    errorHandlingInstance.handleFailure(responseStatusCode)
 }
 
-void handleFailure(int responseStatusCode) {
-    KeywordUtil.markFailedAndStop("Something went wrong. Status code: ${responseStatusCode}")
+responseStatusCode = bookingInstance
+    .storeUserToken()
+    .createBooking(GlobalVariable.bookInformationAsJson)
+    .checkResponseStatus()
+
+if(responseStatusCode != 200) {
+    errorHandlingInstance.handleFailure(responseStatusCode)
 }
+
+KeywordUtil.markPassed("Booking has been created")
+	

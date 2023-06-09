@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Cover new requirements 
+-get booking &amp; partial booking in one scenario</description>
+   <name>TC7 - Get and Partially Update Booking</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>9ebb9377-6114-408c-8cc8-2ae343e66004</testCaseGuid>
+</TestCaseEntity>

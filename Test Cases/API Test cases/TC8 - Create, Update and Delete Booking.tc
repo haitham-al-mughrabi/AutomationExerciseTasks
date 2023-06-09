@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Cover the requested requirements 
+-create &amp; update &amp; delete in one scenario</description>
+   <name>TC8 - Create, Update and Delete Booking</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>44a34576-db91-4bad-b7d9-58f8cff91ed1</testCaseGuid>
+</TestCaseEntity>

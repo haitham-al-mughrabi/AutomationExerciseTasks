@@ -1,10 +1,10 @@
 {
-  "keywordFileContentHash": "DEF5733666D758FD19CF89D54F3FE9C2",
+  "keywordFileContentHash": "0791AE90835EE5756EC9937A7364A0AA",
   "keywordClasses": [
     {
       "name": "Products",
       "keywordMethods": []
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }
